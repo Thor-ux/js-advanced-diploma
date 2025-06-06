@@ -1,4 +1,4 @@
-import { calcHealthLevel, calcTileType } from './utils';
+import { calcTileType, calcHealthLevel, calcMoveRange, calcAttackRange } from './utils';
 
 export default class GamePlay {
   constructor() {
@@ -22,7 +22,7 @@ export default class GamePlay {
   }
 
   /**
-   * Draws boardEl with specific theme
+   
    *
    * @param theme
    */
@@ -54,45 +54,31 @@ export default class GamePlay {
     for (let i = 0; i < this.boardSize ** 2; i += 1) {
       const cellEl = document.createElement('div');
       cellEl.classList.add('cell', 'map-tile', `map-tile-${calcTileType(i, this.boardSize)}`);
-      cellEl.addEventListener('mouseenter', event => this.onCellEnter(event));
-      cellEl.addEventListener('mouseleave', event => this.onCellLeave(event));
-      cellEl.addEventListener('click', event => this.onCellClick(event));
-      this.boardEl.appendChild(cellEl);
+
     }
 
     this.cells = Array.from(this.boardEl.children);
   }
 
   /**
-   * Draws positions (with chars) on boardEl
+   
    *
-   * @param positions array of PositionedCharacter objects
+   *
+   * @param positions
    */
   redrawPositions(positions) {
     for (const cell of this.cells) {
       cell.innerHTML = '';
     }
-
+    
     for (const position of positions) {
-      const cellEl = this.boardEl.children[position.position];
-      const charEl = document.createElement('div');
-      charEl.classList.add('character', position.character.type);
-
-      const healthEl = document.createElement('div');
-      healthEl.classList.add('health-level');
-
       const healthIndicatorEl = document.createElement('div');
-      healthIndicatorEl.classList.add('health-level-indicator', `health-level-indicator-${calcHealthLevel(position.character.health)}`);
-      healthIndicatorEl.style.width = `${position.character.health}%`;
-      healthEl.appendChild(healthIndicatorEl);
-
-      charEl.appendChild(healthEl);
-      cellEl.appendChild(charEl);
-    }
+      healthIndicatorEl.classList.add('health-level-indicator', `health-level-indicator-${calcHealthLevel(position.character.health)}`)
+}
   }
 
   /**
-   * Add listener to mouse enter for cell
+   * 
    *
    * @param callback
    */
@@ -101,7 +87,7 @@ export default class GamePlay {
   }
 
   /**
-   * Add listener to mouse leave for cell
+   * 
    *
    * @param callback
    */
@@ -110,7 +96,7 @@ export default class GamePlay {
   }
 
   /**
-   * Add listener to mouse click for cell
+   * 
    *
    * @param callback
    */
@@ -119,7 +105,7 @@ export default class GamePlay {
   }
 
   /**
-   * Add listener to "New Game" button click
+   
    *
    * @param callback
    */
@@ -128,7 +114,7 @@ export default class GamePlay {
   }
 
   /**
-   * Add listener to "Save Game" button click
+   
    *
    * @param callback
    */
@@ -137,7 +123,7 @@ export default class GamePlay {
   }
 
   /**
-   * Add listener to "Load Game" button click
+   
    *
    * @param callback
    */
